@@ -1,0 +1,51 @@
+.icon {
+	display: inline-block;
+	margin: 2px;
+	height: 16px;
+	width: 16px;
+	background-color: #ccc;
+}
+
+/* ICONS */
+.icon-WV2 {
+	background: url('../images/icons/WV2.png') center center no-repeat;
+}
+.icon-GE1 {
+	background: url('../images/icons/GE1.png') center center no-repeat;
+}
+.icon-QL {
+	background: url('../images/icons/QL.png') center center no-repeat;
+}
+.icon-Fire {
+	background: url('../images/icons/Fire.png') center center no-repeat;
+}
+.icon-Humidity {
+	background: url('../images/icons/Humidity.png') center center no-repeat;
+}
+.icon-Rain {
+	background: url('../images/icons/Rain.png') center center no-repeat;
+}
+.icon-Temperature {
+	background: url('../images/icons/Temperature.png') center center no-repeat;
+}
+.icon-Wind {
+	background: url('../images/icons/Wind.png') center center no-repeat;
+}
+
+/* MARKERS */
+.leaflet-marker-icon {
+	padding: 2px;
+	text-align: center;
+}
+.marker-bar {
+	background: url('../images/markers/bar.png') center center no-repeat;
+}
+.marker-fuel {
+	background: url('../images/markers/fuel.png') center center no-repeat;
+}
+.marker-parking {
+	background: url('../images/markers/parking.png') center center no-repeat;
+}
+.marker-drinking_water {
+	background: url('../images/markers/drinking_water.png') center center no-repeat;
+}
