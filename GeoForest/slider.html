@@ -37,6 +37,7 @@
 
         var sliderVar;
         function Slider() {
+            map.setView(new L.LatLng(53.04920, 51.49129), 14);
             sliderVar = L.control.sideBySide(myLayer2, myLayer1);
             sliderVar.addTo(map);
         }
