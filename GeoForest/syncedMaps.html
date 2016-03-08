@@ -24,40 +24,107 @@
 
     <script>
 
-    var center = [59.336, 5.967];
-    var layer1 = L.tileLayer("https://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
-            maxZoom: 19,
-            subdomains: ["otile1-s", "otile2-s", "otile3-s", "otile4-s"],
-            attribution: ''
-        });
+    var center = [53.0290, 51.8778];
+    var zoom = 12;
+    var layer1 = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
 
     var layer2 = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
 
+    var LS_before = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+            layers: 'Geoportal:LS_before',
+            format: 'image/png',
+            tiled: false,
+            transparent: true,
+            version: '1.1.1'
+        });
+    var LS_after = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+            layers: 'Geoportal:LS_after',
+            format: 'image/png',
+            tiled: false,
+            transparent: true,
+            version: '1.1.1'
+        });
+    var burn = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+            layers: 'Geoportal:burn',
+            format: 'image/png',
+            tiled: false,
+            transparent: true,
+            version: '1.1.1'
+        });
+
     var map1 = L.map('map1', {
-        layers: [layer1],
+        layers: [layer1, LS_before],
         center: center,
-        zoom: 14
+        zoom: zoom
     });
-
-    var blackmap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 18,
-            id: 'lobanov.p50d15pe',
-            accessToken: 'pk.eyJ1IjoibG9iYW5vdiIsImEiOiJjaWtrNHQ0YnUwYTN1dHlqN2pzNHg5eGVkIn0.MO1DmJuIxjlab_pr-FYZ3Q'
-        }).addTo(map1);
-    var opacitySlider = new L.Control.opacitySlider();
-    map1.addControl(opacitySlider);
-
-    opacitySlider.setOpacityLayer(blackmap);
-    blackmap.setOpacity(0.0);
-
 
     var map2 = L.map('map2', {
-        layers: [layer2],
+        layers: [layer2, LS_after, burn],
         center: center,
-        zoom: 14,
+        zoom: zoom,
         zoomControl: false
     });
+
+    var opacitySlider = new L.Control.opacitySlider();
+    map2.addControl(opacitySlider);
+
+    opacitySlider.setOpacityLayer(burn);
+    burn.setOpacity(0.0);
+
+        var owsrootUrl = 'http://192.168.0.117:8080/geoserver/Geoportal/ows';
+        var WFSLayer = null;
+        map2.on('click', function addCluster(e) {
+            if (map2.hasLayer(WFSLayer)) {
+                WFSLayer.clearLayers();
+            }
+            var defaultParameters = {
+                service: 'WFS',
+                version: '2.0',
+                request: 'GetFeature',
+                typeName: 'Geoportal:burn',
+                outputFormat: 'text/javascript',
+                cql_filter: 'CONTAINS(the_geom, POINT('+ e.latlng.lat + ' ' + e.latlng.lng +'))',
+                format_options: 'callback:getJson',
+                maxFeatures : '25',
+
+                SrsName: 'EPSG:4326'
+            };
+            var parameters = L.Util.extend(defaultParameters);
+            var URL = owsrootUrl + L.Util.getParamString(parameters);
+
+            //var WFSLayer = null; изначально объявление стоит тут, но изза необходимости очищать слой временно вынесено за функцию
+            var ajax = $.ajax({
+                url: URL,
+                dataType: 'jsonp',
+                jsonpCallback: 'getJson',
+                success: function (response) {
+                    WFSLayer = L.geoJson(response, {
+                        style: function () {
+                            return {
+                                stroke: true,
+                                weight: 3,
+                                color: '#FF0000',
+                                opacity: 1,
+                                fillColor: 'FFFFFF',
+                                fillOpacity: 0
+                            };
+                        },
+                        onEachFeature: function (feature, layer) {
+                            popupOptions = {maxWidth: 250};
+                            layer.bindPopup((
+                                    "Площадь гари: " + feature.properties.AREA.toString().bold() + " Га".bold() +
+                                    "<br>Преобл. порода: " + feature.properties.dominant.bold() +
+                            "<br>Прибл. формула леса:       " + feature.properties.formula.bold() +
+                            "<br>Лесничества:        " + feature.properties.forestry.bold() +
+                            "<br>№ кварталов:        " + feature.properties.block_id.bold() +
+                            "<br>№ выделов:          " + feature.properties.cluster_id.bold() +
+                            "<br>Возраст:            " + feature.properties.age.bold())
+                                    , popupOptions);
+                        }
+                    }).addTo(map2);
+                }
+            });
+        })
 
     map1.sync(map2);
     map2.sync(map1);
