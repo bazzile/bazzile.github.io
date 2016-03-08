@@ -2,26 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GeoForest</title>
+    <title>Геопортал Иннотер</title>
     <!-- Latest compiled and minified CDN CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="css/Leaflet.Coordinates-0.1.5.css" />
     <link rel="stylesheet" href="css/leaflet-panel-layers.src.css" />
     <link rel="stylesheet" href="css/icons.css" />
     <link rel="stylesheet" href="css/leaflet.draw.css" />
     <link rel="stylesheet" href="css/Control.MiniMap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
+        #map {
+            display:block;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:10px;
+            height:700px;
+            width:100%;
+            background-color:#000;
+        }
+    </style>
+
 </head>
 <body>
     <div>
-        <h1 class="title"><span style="color: #b02022"><b>Геопортал Иннотер</b></span></h1>
         <img src="images/logo_text_ru.png" alt="Innoter logo" title="Innoter.com">
     </div>
     <div class="buttons" style="margin: 15px;">
         <button id="Locator"><b>Где мы?</b></button>
         <button id="InnoLocator"><b>А где Иннотер?</b></button>
+        <button id="WKT"><b>Показать WKT объекта</b></button>
         <button id="Cleaner"><b>Очистить слои</b></button>
+    </div>
+    <div class="img_buttons" style="margin: 15px">
+        <h3>Поиск снимков</h3>
+        <input type="checkbox" id="GE01"> Покрытие GeoEye-01 <br>
+        <input type="checkbox" id="QB02"> Покрытие QuickBird-02 <br>
+        <button type="button" class="btn btn-primary" id="WV2015">
+          <span class="glyphicon glyphicon-search"></span> Поиск
+        </button>
     </div>
     <div id="map"></div>
 
@@ -29,14 +48,15 @@
     <script src="js/Leaflet.Coordinates-0.1.5.src.js"></script>
     <script src="js/leaflet-panel-layers.src.js"></script>
     <script src="js/leaflet.draw-src.js"></script>
+    <script src="js/leaflet.filelayer.js"></script>
+    <script src="js/leaflet.shpfile.js"></script>
+    <script src="js/shp.js"></script>
     <script src="js/Control.MiniMap.js"></script>
     <script src="js/LeafletToWKT.js"></script>
-    <script src="js/leaflet-side-by-side.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-1.12.0.min.js"></script>
     <script>
         // создаём объект карты
-        var map = L.map('map', {center: [53.03, 52.16], zoom: 10});
+        var map = L.map('map', {center: [54.0, 29.0], zoom: 4});
         // создаём объеткы слоёв
         var blackMap, openStreetMap, mapquestOSM, MapQuestOpen_Aerial, Stamen_Watercolor;
         var OpenWeatherMap_RainClassic, OpenWeatherMap_Clouds, OpenWeatherMap_Temperature, OpenWeatherMap_Wind, OpenWeatherMap_Precipitation;
