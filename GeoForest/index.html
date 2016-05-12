@@ -91,28 +91,28 @@
             attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
             opacity: 0.5
         });
-        wmsGE = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+        wmsGE = L.tileLayer.wms("http://192.168.0.129:8080/geoserver/Geoportal/wms", {
             layers: 'Geoportal:GeoEye_2016',
             format: 'image/png',
             transparent: true,
             version: '1.1.0',
             attribution: "myattribution"
         });
-        wmsWV2 = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+        wmsWV2 = L.tileLayer.wms("http://192.168.0.129:8080/geoserver/Geoportal/wms", {
             layers: 'Geoportal:WorldView2_2016',
             format: 'image/png',
             transparent: true,
             version: '1.1.0',
             attribution: "myattribution"
         });
-        wmsQL = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+        wmsQL = L.tileLayer.wms("http://192.168.0.129:8080/geoserver/Geoportal/wms", {
             layers: 'Geoportal:Moscow_QL_white',
             format: 'image/png',
             transparent: true,
             version: '1.1.0',
             attribution: "myattribution"
         });
-        wmsWV3 = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+        wmsWV3 = L.tileLayer.wms("http://192.168.0.129:8080/geoserver/Geoportal/wms", {
             layers: 'Geoportal:WV03',
             format: 'image/png',
             transparent: true,
@@ -354,7 +354,7 @@
         // добавляем WFS с атрибутами снимков
         // параметры запросов CQL
         var condition = '';
-        var owsrootUrl = 'http://192.168.0.117:8080/geoserver/Geoportal/ows';
+        var owsrootUrl = 'http://192.168.0.129:8080/geoserver/Geoportal/ows';
         var WFSLayer = null;
         function addWV2015() {
             if (map.hasLayer(WFSLayer)) {

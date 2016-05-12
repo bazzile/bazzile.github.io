@@ -30,21 +30,21 @@
 
     var layer2 = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
 
-    var LS_before = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+    var LS_before = L.tileLayer.wms("http://192.168.0.129:8080/geoserver/Geoportal/wms", {
             layers: 'Geoportal:LS_before',
             format: 'image/png',
             tiled: false,
             transparent: true,
             version: '1.1.1'
         });
-    var LS_after = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+    var LS_after = L.tileLayer.wms("http://192.168.0.129:8080/geoserver/Geoportal/wms", {
             layers: 'Geoportal:LS_after',
             format: 'image/png',
             tiled: false,
             transparent: true,
             version: '1.1.1'
         });
-    var burn = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+    var burn = L.tileLayer.wms("http://192.168.0.129:8080/geoserver/Geoportal/wms", {
             layers: 'Geoportal:burn',
             format: 'image/png',
             tiled: false,
@@ -71,7 +71,7 @@
     opacitySlider.setOpacityLayer(burn);
     burn.setOpacity(0.0);
 
-        var owsrootUrl = 'http://192.168.0.117:8080/geoserver/Geoportal/ows';
+        var owsrootUrl = 'http://192.168.0.129:8080/geoserver/Geoportal/ows';
         var WFSLayer = null;
         map2.on('click', function addCluster(e) {
             if (map2.hasLayer(WFSLayer)) {
