@@ -20,9 +20,9 @@
     <script src="js/jquery-1.12.0.min.js"></script>
     <script>
         var map = L.map('map', {center: [53.03, 52.16], zoom: 10});
-        uri = "http://192.168.0.117:8080/geoserver/Geoportal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&LAYER=Geoportal:species";
+        uri = "http://192.168.0.129:8080/geoserver/Geoportal/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&LAYER=Geoportal:species";
         L.wmsLegend(uri);
-        var myLayer1 = L.tileLayer.wms("http://192.168.0.117:8080/geoserver/Geoportal/wms", {
+        var myLayer1 = L.tileLayer.wms("http://192.168.0.129:8080/geoserver/Geoportal/wms", {
             layers: 'Geoportal:species',
             format: 'image/png',
             transparent: true,
