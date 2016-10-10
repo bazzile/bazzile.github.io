@@ -2,8 +2,8 @@
 <?xml-stylesheet type="text/xsl" href="plugins.xsl" ?>
 <plugins>
   <pyqgis_plugin name="Helper" version="0.1.0">
-    <description>This is the test plugin</description>
-    <homepage>http://gis-lab.info/qa/qgis-dev-python.html</homepage>
+    <description>Innoter Helper</description>
+    <homepage>http://bazzile.github.io</homepage>
     <qgis_minimum_version>1.0</qgis_minimum_version>
     <file_name>Helper.zip</file_name>
     <author_name>Innoter</author_name>
