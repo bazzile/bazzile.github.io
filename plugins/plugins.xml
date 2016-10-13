@@ -1,8 +1,8 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <?xml-stylesheet type='text/xsl' href='/contributed.xsl' ?>
 <plugins>
-	<pyqgis_plugin name='Helper' version='0.0.2'>
-		<description>Plungin that helps you with your geospatial routine </description>
+	<pyqgis_plugin name='Helper' version='0.0.3'>
+		<description>Плагин, который поможет справиться с геопространственной рутиной / Plugin that helps you with your geospatial routine </description>
 		<version>0.0.3</version>
 		<qgis_minimum_version>2.0</qgis_minimum_version>
 		<homepage></homepage>
@@ -11,7 +11,7 @@
 		<download_url>http://bazzile.github.io/plugins/Helper.zip</download_url>
 		<uploaded_by>Innoter</uploaded_by>
 		<create_date>2016-10-05</create_date>
-		<update_date>None</update_date>
+		<update_date>2016-10-13</update_date>
 		<experimental>False</experimental>
 	</pyqgis_plugin>
 </plugins>
